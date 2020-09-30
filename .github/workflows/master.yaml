@@ -1,0 +1,23 @@
+name: CI
+on: 
+  push: 
+    branches: [ master ]
+jobs: 
+  jar:
+    if: "!contains(github.event.head_commit.message, '[skip-ci]')"
+    env: 
+      app: spring-petclinic
+      name: 
+    runs-on: ubuntu-latest
+    steps: 
+    - 
+      name: build jar
+      run: |
+        set -x
+        git clone https://${name}:${password}@github.com/${name}/${app}
+        cd ${app}
+        ./mvnw package
+        mv target/${app}-*.jar target/${app}.jar
+        git add target/${app}.jar
+        git commit -m ${app}.jar-$(date +%s)
+        git push
