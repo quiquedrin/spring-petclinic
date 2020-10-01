@@ -10,7 +10,8 @@ ARG GITHUB_APP=spring-petclinic
 ARG GITHUB_REPOSITORY=quiquedrin/spring-petclinic
 WORKDIR /${GITHUB_REPOSITORY}
 COPY --from=clone /${GITHUB_REPOSITORY} .
-RUN ./mvnw package && mv target/${GITHUB_APP}-*.jar target/${GITHUB_APP}.jar
+#RUN ./mvnw package && mv target/${GITHUB_APP}-*.jar target/${GITHUB_APP}.jar
+RUN mvn install && mv target/${GITHUB_APP}-*.jar target/${GITHUB_APP}.jar
 
 FROM openjdk:jre-alpine AS production
 ARG GITHUB_APP=spring-petclinic
