@@ -4,7 +4,8 @@ ARG GITHUB_USER=quiquedrin
 WORKDIR /${GITHUB_USER}
 RUN git clone https://github.com/${GITHUB_REPOSITORY}
 
-FROM maven:alpine AS build
+#FROM maven:alpine AS build 
+FROM maven AS build
 ARG GITHUB_APP=spring-petclinic
 ARG GITHUB_REPOSITORY=quiquedrin/spring-petclinic
 WORKDIR /${GITHUB_REPOSITORY}
